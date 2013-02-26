@@ -1,0 +1,48 @@
+extends layout
+
+    
+block content
+  div(class='navbar navbar-inverse navbar-fixed-top')
+    div(class='navbar-inner')
+      div(class='container')
+        a(class='brand', href="splash") ChordFork
+        ul(class="nav")
+          li
+            a(href="#", onclick="return false;") explore
+          li(class="active")
+            a(href="#", onclick="return false;") create
+  div(class="container-fluid")
+    div(class="well")
+      h4 Chords
+      Chords will be displayed here as the user updates them.
+    div(class="btn-group")
+      a(class="chord-note btn btn-inverse", href="#", onclick="return false;") C
+      a(class="chord-note btn btn-inverse", href="#", onclick="return false;") D
+      a(class="chord-note btn btn-inverse", href="#", onclick="return false;") E
+      a(class="chord-note btn btn-inverse", href="#", onclick="return false;") F
+      a(class="chord-note btn btn-inverse", href="#", onclick="return false;") G
+      a(class="chord-note btn btn-inverse", href="#", onclick="return false;") A
+      a(class="chord-note btn btn-inverse", href="#", onclick="return false;") B
+    hr
+    div(class="btn-group")
+      a(class="chord-note-mod btn btn-inverse", href="#", onclick="return false;") #
+      a(class="chord-note-mod btn btn-inverse", href="#", onclick="return false;") b
+    hr 
+    div(class="btn-group")
+      a(class="chord-tri btn btn-inverse", "href="#", onclick="return false;") Maj
+      a(class="chord-tri btn btn-inverse", "href="#", onclick="return false;") Min
+      a(class="chord-tri btn btn-inverse", "href="#", onclick="return false;") Dim
+      a(class="chord-tri btn btn-inverse", "href="#", onclick="return false;") Aug
+    hr 
+    div(class="btn-group")
+      a(class="chord-mod btn btn-inverse", href="#", onclick="return false;") 5
+      a(class="chord-mod btn btn-inverse", href="#", onclick="return false;") 6
+      a(class="chord-mod btn btn-inverse", href="#", onclick="return false;") 7
+      a(class="chord-mod btn btn-inverse", href="#", onclick="return false;") 9
+      a(class="chord-mod btn btn-inverse", href="#", onclick="return false;") 11
+      a(class="chord-mod btn btn-inverse", href="#", onclick="return false;") 13
+    hr
+    a(id="clear", class="btn btn-danger", href="#", onclick="return false;") clear
+    div(class="divider")
+    a(class="btn btn-success", href="#", onclick="return false;") next
+    script(type="text/javascript", src="/javascripts/create.js")

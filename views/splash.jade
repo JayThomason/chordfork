@@ -1,0 +1,41 @@
+extends layout
+
+
+block content
+  div(class='navbar navbar-inverse navbar-fixed-top')
+    div(class='navbar-inner')
+      div(class='container')
+        a(class='brand', href="#") ChordFork
+        ul.nav
+          li
+            a(href="#") explore
+          li
+            a(href="create") create
+  div.container-fluid
+    div(class="hero-unit")
+      h2(style="text-align: center") Welcome to ChordFork.
+      p.lead(style="text-align: center") A simple version control tool for songwriting.
+    div.row-fluid
+      div.span3
+      div.span3
+        form(id="form_login", action="/login", method="post", enctype="application/x-www-urlencoded")
+            h3 Log In
+            input(type="text", name="login_username", class="input-medium", placeholder="user name")
+            br
+            input(type="password", name="login_password", class="input-medium", placeholder="password")
+            br
+            button(type="submit", id="login_submit", class="btn btn-success") 
+              strong Enter
+      div.span3
+        form(id="form_create_user", action="/account/create", method="post", enctype="application/x-www-urlencoded")
+          div
+            h3 Sign Up
+          div.control-group
+            input(type="text", name="create_username", class="input-medium", placeholder="user name")
+          div.control-group
+            input(type="password", name="create_password", class="input-medium", placeholder="password")
+          div.control-group
+            input(type="password", class="input-medium", placeholder="password")
+          button(type="submit", id="create_submit", class="btn btn-success") Enter
+            strong Create
+
