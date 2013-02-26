@@ -12,9 +12,13 @@ block content
           li(class="active")
             a(href="#", onclick="return false;") create
   div(class="container-fluid")
+    div(style="text-align: center")
+      h3 New Song
     div(class="well")
       h4 Chords
-      Chords will be displayed here as the user updates them.
+      div(class="display-chords")
+      br
+      div(id="current-chord") Begin by creating a chord.
     div(class="btn-group")
       a(class="chord-note btn btn-inverse", href="#", onclick="return false;") C
       a(class="chord-note btn btn-inverse", href="#", onclick="return false;") D
@@ -44,5 +48,5 @@ block content
     hr
     a(id="clear", class="btn btn-danger", href="#", onclick="return false;") clear
     div(class="divider")
-    a(class="btn btn-success", href="#", onclick="return false;") next
+    a(id="next-chord", class="btn btn-success", href="#", onclick="return false;") next
     script(type="text/javascript", src="/javascripts/create.js")
