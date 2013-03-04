@@ -14,6 +14,7 @@ var express = require ('express')
       host: config.db_host,
       port: config.db_port
     })
+  , crypto = require('crypto')
   , app = express ();
 
 
@@ -41,11 +42,17 @@ app.configure (function () {
  * Sequelize Configuration
  */
 
-var User = db.import(__dirname + '/models/user.js');
-User.sync ().success( function () {
+var User = db.import (__dirname + '/models/user.js');
+User.sync ().success ( function () {
   console.log ("User table created.");
 }).error (function () {
   console.log ("Failed to create User table.");
+});
+var TestSong = db.import (__dirname + '/models/test.js');
+TestSong.sync ().success (function () {
+  console.log ("TestSong table created.");
+}).error (function () {
+  console.log ("Failed to create TestSong table.");
 });
 
 
@@ -61,6 +68,7 @@ app.post ('/login', function (req, res) {
     if (user == null)
       return;
     req.session.logged_in = true;
+    req.session.username = User.name;
   });
 });
 
@@ -74,6 +82,27 @@ app.post ('/account/create', function (req, res) {
     password: pw
   }).success (function (user) {
     console.log ('Created user: ' + user.name);
+  }).error (function () {
+    console.log ('Failed to create user.');
+  });
+});
+
+app.post ('/test', function (req, res) {
+  if (req.session.username == null)
+    return;
+  var username = req.session.username;
+  var testsong = req.body.song;
+/*  var current_date = (new Date ()).valueOf ().toString ();
+  var random = Math.random ().toString ();
+  var rand_id = crypto.createHash ('sha1').update (current_date + random).digest ('hex');*/
+  var rand_id = crypto.randomBytes (10).toString ('hex');
+  TestSong.create ({
+    id: rand_id,
+    song: testsong
+  }).success (function (song) {
+    console.log ('Create test song: ' + song.id);
+  }).error (function () {
+    console.log ('Failed to create test song.');
   });
 });
 
