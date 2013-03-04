@@ -5,11 +5,12 @@
  * the modifier is 7.
  * */
 
-function Chord (note, noteMod, type, mod) {
+function Chord (note, noteMod, type, mod, index) {
   this.note = note;
   this.noteMod = noteMod;
   this.type = type;
   this.mod = mod;
+  this.index = index;
 }
 
 /* Prints the current chord to the current-chord div on the create page. */
@@ -21,7 +22,14 @@ Chord.prototype.print = function () {
   $("#current-chord").text("current: " + this.note + this.noteMod + this.type + this.mod);
 }
 
-chord = new Chord (null, null, null, null);
+Chord.prototype.clear = function () {
+  this.note = null;
+  this.noteMod = null;
+  this.type = null;
+  this.mod = null;
+}
+
+chord = new Chord (null, null, null, null, null);
 chords = [];
 
 /* Helper function which determines valid mod notes. */
@@ -81,24 +89,36 @@ $(".chord-mod").click(function () {
 
 $("#clear").click(function () {
   chords.push (new Chord (chord.note, chord.noteMod, chord.type, chord.mod));
-  chord.note = null;
-  chord.noteMod = null;
-  chord.type = null;
-  chord.mod = null;
+  chord.clear ();
   chord.print ();
 });
 
 $("#next-chord").click (function () {
   if (chord.note == null || chord.note == "")
     return;
-  chords.push (new Chord (chord.note, chord.noteMod, chord.type, chord.mod));
-  chord.note = null;
-  chord.noteMod = null;
-  chord.type = null;
-  chord.mod = null;
-  var index = chords.length - 1;
-  var lastChord = chords[index];
-  $(".display-chords").append ("<strong id='test" + index + "'>" 
-      + lastChord.note + lastChord.noteMod + lastChord.type + lastChord.mod + '</strong>  ');
-  chord.print ();
+  if (chord.index != null) {
+    chords[chord.index] = new Chord (chord.note, chord.noteMod, chord.type, chord.mod);
+    $("#test" + chord.index).text (chord.note + chord.noteMod + chord.type + chord.mod);
+    chord.clear ();
+    chord.index = null;
+    chord.print ();
+  }
+  else {
+    chords.push (new Chord (chord.note, chord.noteMod, chord.type, chord.mod));
+    chord.clear ();
+    chord.index = null;
+    var index = chords.length - 1;
+    var lastChord = chords[index];
+    $(".display-chords").append ("<strong id='test" + index + "' class='disp-chords'>" 
+        + lastChord.note + lastChord.noteMod + lastChord.type + lastChord.mod + '</strong>');
+    chord.print ();
+    $("#test" + index).click (function () {
+      chord.note = chords[index].note;
+      chord.noteMod = chords[index].noteMod;
+      chord.type = chords[index].type;
+      chord.mod = chords[index].mod;
+      chord.index = index;
+      chord.print ();
+    });
+  }
 });
