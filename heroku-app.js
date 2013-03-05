@@ -31,7 +31,7 @@ var db = new Sequelize (db_name, db_user, db_pass,
   dialect: db_dialect,
   protocol: db_protocol,
   host: db_host,
-  port: process.env.PORT
+  port: null
 });
 
 
