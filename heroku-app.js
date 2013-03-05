@@ -21,7 +21,6 @@ var url = require('url')
   , db_user = authArr[0]
   , db_pass = authArr[1]
   , db_host = dbUrl.host
-  , db_post = null
   , db_dialect = 'postgres'
   , db_protocol = 'postgres';
 
@@ -32,7 +31,7 @@ var db = new Sequelize (db_name, db_user, db_pass,
   dialect: db_dialect,
   protocol: db_protocol,
   host: db_host,
-  port: db_port
+  port: process.env.PORT
 });
 
 
