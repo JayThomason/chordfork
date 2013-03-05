@@ -18,7 +18,7 @@ var url = require('url')
   , db_user = authArr[0]
   , db_pass = authArr[1]
   , db_host = dbUrl.host
-  , db_post = null;
+  , db_post = null
   , db_dialect = 'postgres'
   , db_protocol = 'postgres';
 
