@@ -8,14 +8,29 @@ var express = require ('express')
   , http = require ('http')
   , path = require ('path')
   , Sequelize = require ('sequelize')
-  , config = require ('./config')
-  , db = new Sequelize (config.db_name, config.db_username, config.db_password, {
-      dialect: config.db_dialect,
-      host: config.db_host,
-      port: config.db_port
-    })
   , crypto = require('crypto')
   , app = express ();
+
+var url = require('url')
+  , dbUrl = url.parse(process.env.HEROKU_POSTGRESQL_COPPER_RUL)
+  , authArr = dbUrl.auth.split(':')
+  , db_name = dbUrl.path.substring(1)
+  , db_user = authArr[0]
+  , db_pass = authArr[1]
+  , db_host = dbUrl.host
+  , db_post = null;
+  , db_dialect = 'postgres'
+  , db_protocol = 'postgres';
+
+
+  
+var db = new Sequelize (db_name, db_user, db_pass, 
+{
+  dialect: db_dialect,
+  protocol: db_protocol,
+  host: db_host,
+  port: db_port
+});
 
 
 /**

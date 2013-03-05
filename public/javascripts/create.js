@@ -128,9 +128,11 @@ $("#quick-post").click (function () {
   var callback = function (data) {
     $(".container-fluid").append ("test");
   };
-  $.post ('/test/', {
+  $.post ('/quickpost/', {
       "song": song_body 
   }).done (function (data) {
-    alert ("quick post made.");
+    $(".modal-post-link").text (data);
+    $(".modal-post-link").attr ("href", data);
+    $("#myModal").modal('show');
   });
 });

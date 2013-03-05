@@ -1,0 +1,20 @@
+extends layout
+
+    
+block content
+  div(class='navbar navbar-inverse navbar-fixed-top')
+    div(class='navbar-inner')
+      div(class='container')
+        a(class='brand', href="splash") ChordFork
+        ul(class="nav")
+          li
+            a(href="#", onclick="return false;") explore
+          li
+            a(href="#", onclick="return false;") create
+  div(class="container-fluid")
+    div(style="text-align: center")
+      h3 Quick Song 
+      h4 by #{owner}
+    div(class="well")
+      h4 Chords
+      span(class="display-chords")= chords

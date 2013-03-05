@@ -5,6 +5,11 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
+    owner: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "Anonymous"
+    },
     song: {
       type: DataTypes.STRING,
       allowNull: false,
