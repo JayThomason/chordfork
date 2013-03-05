@@ -119,7 +119,7 @@ app.post ('/quickpost', function (req, res) {
   }).success (function (song) {
     console.log ('Create quick song: ' + song.identifier);
     console.log ('chords: ' + song.song);
-    res.send ('http://54.235.158.36/quicksong/' + song.identifier);
+    res.send (song.identifier);
   }).error (function () {
     console.log ('Failed to create quick song.');
   });
