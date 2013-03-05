@@ -110,7 +110,7 @@ $("#next-chord").click (function () {
     var index = chords.length - 1;
     var lastChord = chords[index];
     $(".display-chords").append ("<strong id='test" + index + "' class='disp-chords'>" 
-        + lastChord.note + lastChord.noteMod + lastChord.type + lastChord.mod + '</strong>');
+        + lastChord.note + lastChord.noteMod + lastChord.type + lastChord.mod + ' </strong>');
     chord.print ();
     $("#test" + index).click (function () {
       chord.note = chords[index].note;
@@ -121,4 +121,16 @@ $("#next-chord").click (function () {
       chord.print ();
     });
   }
+});
+
+$("#quick-post").click (function () {
+  var song_body = $(".display-chords").text();
+  var callback = function (data) {
+    $(".container-fluid").append ("test");
+  };
+  $.post ('/test/', {
+      "song": song_body 
+  }).done (function (data) {
+    alert ("quick post made.");
+  });
 });

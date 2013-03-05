@@ -43,16 +43,20 @@ app.configure (function () {
  */
 
 var User = db.import (__dirname + '/models/user.js');
-User.sync ().success ( function () {
+User.sync ({
+  force: true
+}).success ( function () {
   console.log ("User table created.");
 }).error (function () {
   console.log ("Failed to create User table.");
 });
-var TestSong = db.import (__dirname + '/models/test.js');
-TestSong.sync ().success (function () {
-  console.log ("TestSong table created.");
+var QuickSong = db.import (__dirname + '/models/quicksong.js');
+QuickSong.sync ({
+  force: true
+}).success (function () {
+  console.log ("QuickSong table created.");
 }).error (function () {
-  console.log ("Failed to create TestSong table.");
+  console.log ("Failed to create QuickSong table.");
 });
 
 
@@ -87,25 +91,39 @@ app.post ('/account/create', function (req, res) {
   });
 });
 
-app.post ('/test', function (req, res) {
-  if (req.session.username == null)
+app.post ('/quickpost', function (req, res) {
+  var quicksong = req.body.song;
+  if (quicksong == null)
     return;
-  var username = req.session.username;
-  var testsong = req.body.song;
-/*  var current_date = (new Date ()).valueOf ().toString ();
-  var random = Math.random ().toString ();
-  var rand_id = crypto.createHash ('sha1').update (current_date + random).digest ('hex');*/
   var rand_id = crypto.randomBytes (10).toString ('hex');
-  TestSong.create ({
-    id: rand_id,
-    song: testsong
+  QuickSong.create ({
+    identifier: rand_id,
+    song: quicksong
   }).success (function (song) {
-    console.log ('Create test song: ' + song.id);
+    console.log ('Create quick song: ' + song.identifier);
+    console.log ('chords: ' + song.song);
+    res.send ('http://54.235.158.36/quickpost/' + song.identifier);
   }).error (function () {
-    console.log ('Failed to create test song.');
+    console.log ('Failed to create quick song.');
   });
 });
 
+app.get ('/quickpost/:id', function (req, res) {
+  var id = req.params.id;
+  if (id == null)
+    return;
+  QuickSong.find (id).error (function (err) {
+    console.log (err);
+    res.send ('failed to find quick song ' + id);
+  }).success (function (song) {
+    if (song == null) {
+      res.send ('failed to find quick song ' + id);
+      return;
+    }
+    console.log (song.song);
+    res.send (song.song);
+  });
+});
 
 
 
