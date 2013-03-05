@@ -11,8 +11,11 @@ var express = require ('express')
   , crypto = require('crypto')
   , app = express ();
 
+
+console.log (process.env);
+
 var url = require('url')
-  , dbUrl = url.parse(process.env.HEROKU_POSTGRESQL_COPPER_RUL)
+  , dbUrl = url.parse(process.env.DATABASE_URL)
   , authArr = dbUrl.auth.split(':')
   , db_name = dbUrl.path.substring(1)
   , db_user = authArr[0]
