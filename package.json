@@ -12,4 +12,8 @@
     "sequelize": "1.6.0-beta4",
       "connect": "2.7.3"
   }
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  }
 }
