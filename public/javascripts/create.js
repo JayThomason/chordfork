@@ -132,7 +132,7 @@ $("#quick-post").click (function () {
       "song": song_body 
   }).done (function (data) {
     $(".modal-post-link").text (data);
-    $(".modal-post-link").attr ("href", "/quickson/" + data);
+    $(".modal-post-link").attr ("href", "/quicksong/" + data);
     $("#myModal").modal('show');
   });
 });
