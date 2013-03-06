@@ -80,7 +80,7 @@ QuickSong.sync ({
 /**
  * Routes and Controllers
  */
-app.get ('/', routes.index);
+app.get ('/', routes.splash);
 app.get ('/splash', routes.splash);
 app.get ('/create', routes.create);
 
