@@ -88,9 +88,18 @@ $(".chord-mod").click(function () {
 });
 
 $("#clear").click(function () {
-  chords.push (new Chord (chord.note, chord.noteMod, chord.type, chord.mod));
-  chord.clear ();
-  chord.print ();
+  if (chord.index == null) {
+    chords.push (new Chord (chord.note, chord.noteMod, chord.type, chord.mod));
+    chord.clear ();
+    chord.print ();
+  }
+  else {
+    $("#test" + chord.index).remove ();
+    chords.splice (chord.index, 1);
+    chord.clear ();
+    chord.print ();
+    $("#clear").text("clear");
+  }
 });
 
 $("#next-chord").click (function () {
@@ -102,6 +111,7 @@ $("#next-chord").click (function () {
     chord.clear ();
     chord.index = null;
     chord.print ();
+    $("#clear").text ("clear");
   }
   else {
     chords.push (new Chord (chord.note, chord.noteMod, chord.type, chord.mod));
@@ -119,6 +129,7 @@ $("#next-chord").click (function () {
       chord.mod = chords[index].mod;
       chord.index = index;
       chord.print ();
+      $("#clear").text ("remove");
     });
   }
 });
