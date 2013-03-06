@@ -5,3 +5,25 @@ strong.disp-chords {
   display: inline-block;
 }
 
+.title {
+  border-bottom: 1px solid #eeeeee;
+  margin-bottom: 20px;
+}
+
+.btn-inverse {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.well {
+  margin-bottom: 30px;
+}
+
+.btn-last {
+  margin-bottom: 30px;
+}
+
+.btn-final {
+  margin-bottom: 50px;
+}
+

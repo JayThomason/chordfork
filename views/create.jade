@@ -12,53 +12,85 @@ block content
           li(class="active")
             a(href="#", onclick="return false;") create
   div(class="container-fluid")
-    div(style="text-align: center")
-      h3 New Song
-    div(class="well")
-      h4 Chords
-      span(class="display-chords")
+    div(class="title text-center")
+      h3 Create A New Song
+      input(type="text", placeholder="song name", style="font-weight: bold")
+
+    div(class="span4")
+      div(class="well")
+        h4(class="text-center") Chords
+        span(class="display-chords")
+        br
+        div(id="current-chord") Begin by creating a chord.
+      div(class="btn-group")
+        a(class="chord-note btn btn-inverse", href="#", onclick="return false;") C
+        a(class="chord-note btn btn-inverse", href="#", onclick="return false;") D
+        a(class="chord-note btn btn-inverse", href="#", onclick="return false;") E
+        a(class="chord-note btn btn-inverse", href="#", onclick="return false;") F
+        a(class="chord-note btn btn-inverse", href="#", onclick="return false;") G
+        a(class="chord-note btn btn-inverse", href="#", onclick="return false;") A
+        a(class="chord-note btn btn-inverse", href="#", onclick="return false;") B
       br
-      div(id="current-chord") Begin by creating a chord.
-    div(class="btn-group")
-      a(class="chord-note btn btn-inverse", href="#", onclick="return false;") C
-      a(class="chord-note btn btn-inverse", href="#", onclick="return false;") D
-      a(class="chord-note btn btn-inverse", href="#", onclick="return false;") E
-      a(class="chord-note btn btn-inverse", href="#", onclick="return false;") F
-      a(class="chord-note btn btn-inverse", href="#", onclick="return false;") G
-      a(class="chord-note btn btn-inverse", href="#", onclick="return false;") A
-      a(class="chord-note btn btn-inverse", href="#", onclick="return false;") B
-    hr
-    div(class="btn-group")
-      a(class="chord-note-mod btn btn-inverse", href="#", onclick="return false;") #
-      a(class="chord-note-mod btn btn-inverse", href="#", onclick="return false;") b
-    hr 
-    div(class="btn-group")
-      a(class="chord-tri btn btn-inverse", "href="#", onclick="return false;") Maj
-      a(class="chord-tri btn btn-inverse", "href="#", onclick="return false;") Min
-      a(class="chord-tri btn btn-inverse", "href="#", onclick="return false;") Dim
-      a(class="chord-tri btn btn-inverse", "href="#", onclick="return false;") Aug
-    hr 
-    div(class="btn-group")
-      a(class="chord-mod btn btn-inverse", href="#", onclick="return false;") 5
-      a(class="chord-mod btn btn-inverse", href="#", onclick="return false;") 6
-      a(class="chord-mod btn btn-inverse", href="#", onclick="return false;") 7
-      a(class="chord-mod btn btn-inverse", href="#", onclick="return false;") 9
-      a(class="chord-mod btn btn-inverse", href="#", onclick="return false;") 11
-      a(class="chord-mod btn btn-inverse", href="#", onclick="return false;") 13
-    hr
-    a(id="clear", class="btn btn-danger", href="#", onclick="return false;") clear
-    div(class="divider")
-    a(id="next-chord", class="btn btn-success", href="#", onclick="return false;") next
-    div(class="divider")
-    a(id="quick-post", class="btn btn-success", href="#", onclick="return false;") quick post
 
-    div(id="myModal", class="modal hide fade", tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
-      div(class="modal-header")
-        button(type="button", class="close", data-dismiss="modal", aria-hidden="true") x
-        h3(id="myModalLabel") Your song has been posted!
-        div(class="modal-body")
-          p It can be shared here: 
-            a(href="#", class="modal-post-link") test 
+      div(class="btn-group")
+        a(class="chord-note-mod btn btn-inverse", href="#", onclick="return false;") #
+        a(class="chord-note-mod btn btn-inverse", href="#", onclick="return false;") b
+      br
 
-    script(type="text/javascript", src="/javascripts/create.js")
-    link(rel='stylesheet', href='/stylesheets/create.css')
+      div(class="btn-group")
+        a(class="chord-tri btn btn-inverse", "href="#", onclick="return false;") Maj
+        a(class="chord-tri btn btn-inverse", "href="#", onclick="return false;") Min
+        a(class="chord-tri btn btn-inverse", "href="#", onclick="return false;") Dim
+        a(class="chord-tri btn btn-inverse", "href="#", onclick="return false;") Aug
+      br
+
+      div(class="btn-group")
+        a(class="chord-mod btn btn-inverse btn-last", href="#", onclick="return false;") 5
+        a(class="chord-mod btn btn-inverse btn-last", href="#", onclick="return false;") 6
+        a(class="chord-mod btn btn-inverse btn-last", href="#", onclick="return false;") 7
+        a(class="chord-mod btn btn-inverse btn-last", href="#", onclick="return false;") 9
+        a(class="chord-mod btn btn-inverse btn-last", href="#", onclick="return false;") 11
+        a(class="chord-mod btn btn-inverse btn-last", href="#", onclick="return false;") 13
+      br
+
+      a(id="clear", class="btn btn-danger btn-final", href="#", onclick="return false;") clear
+      div(class="divider")
+      a(id="next-chord", class="btn btn-success btn-final", href="#", onclick="return false;") next
+      div(class="divider")
+      a(id="quick-post", class="btn btn-success btn-final", href="#", onclick="return false;") quick post
+      hr
+
+
+    div(class="span4 offset1 text-center")
+      div(class="well")
+        h4 Notes
+        br
+        textarea(rows="17", placeholder="Tell us about your song!")
+      hr
+
+    div(class="span3 offset1 text-center")
+      br
+      h4 Data
+      br
+      strong Tags:&nbsp;&nbsp;&nbsp;&nbsp;
+        input(type="text", class="input-small")
+      br
+      strong Genre:&nbsp;&nbsp;
+        input(type="text", class="input-small")
+      br
+      br
+      br
+      a(id="post", class="btn btn-success", href="#", onclick="return false;")
+        strong Create
+
+
+  div(id="myModal", class="modal hide fade", tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+    div(class="modal-header")
+      button(type="button", class="close", data-dismiss="modal", aria-hidden="true") x
+      h3(id="myModalLabel") Your song has been posted!
+      div(class="modal-body")
+        p It can be shared here: 
+          a(href="#", class="modal-post-link") test 
+
+  script(type="text/javascript", src="/javascripts/create.js")
+  link(rel='stylesheet', href='/stylesheets/create.css')
