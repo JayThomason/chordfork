@@ -32,13 +32,11 @@ var singleton = function singleton () {
       var object = require (modelsPath + "/" + name);
       var options = object.options || { }
       var modelName = name.replace (/\.js$/i, "");
-      console.log (object, options, modelName);
       models[modelName] = sequelize.define (modelName, object.model, options);
       if ("relations" in object) { 
         relationships[modelName] = object.relations;
       }
     });
-    console.log (models);
     for (var name in relationships) { 
       var relation = relationships[name];
       for (var relName in relation) {

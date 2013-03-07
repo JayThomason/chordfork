@@ -139,11 +139,11 @@ $("#quick-post").click (function () {
   var callback = function (data) {
     $(".container-fluid").append ("test");
   };
-  $.post ('/quickpost/', {
+  $.post ('/quicksong/create', {
       "song": song_body 
   }).done (function (data) {
     $(".modal-post-link").text (data);
-    $(".modal-post-link").attr ("href", "/quicksong/" + data);
+    $(".modal-post-link").attr ("href", "/quicksong/view/" + data);
     $("#myModal").modal('show');
   });
 });
