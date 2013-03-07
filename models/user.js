@@ -1,12 +1,15 @@
-module.exports = function (sequelize, DataTypes) {
-  return sequelize.define ('User', {
+var orm = require ('../sequelize-singleton')
+  , seq = orm.Seq ();
+
+module.exports = {
+  model: {
     id: {
-      type: DataTypes.INTEGER,
+      type: seq.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
     name: {
-      type: DataTypes.STRING,
+      type: seq.STRING,
       allowNull: false,
       unique: true,
       validate: {
@@ -18,7 +21,7 @@ module.exports = function (sequelize, DataTypes) {
       }
     },
     password: {
-      type: DataTypes.STRING,
+      type: seq.STRING,
       allowNull: false,
       validate: {
         len: {
@@ -26,5 +29,5 @@ module.exports = function (sequelize, DataTypes) {
         }
       }
     }
-  });
+  }
 }

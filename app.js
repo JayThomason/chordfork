@@ -7,15 +7,25 @@ var express = require ('express')
   , user = require ('./routes/user')
   , http = require ('http')
   , path = require ('path')
-  , Sequelize = require ('sequelize')
+  , crypto = require('crypto')
   , config = require ('./config')
+  , app = express ();
+
+require ('./sequelize-singleton').setup ('./models', config.db_name, 
+  config.db_username, config.db_password, {
+    dialect: config.db_dialect,
+    host: config.db_host,
+    port: config.db_port 
+  });
+db = require ('./sequelize-singleton');
+
+
+/*, config = require ('./config')
   , db = new Sequelize (config.db_name, config.db_username, config.db_password, {
       dialect: config.db_dialect,
       host: config.db_host,
       port: config.db_port
-    })
-  , crypto = require('crypto')
-  , app = express ();
+    }) */
 
 
 /**
@@ -42,7 +52,7 @@ app.configure (function () {
  * Sequelize Configuration
  */
 
-var User = db.import (__dirname + '/models/user.js');
+var User = db.model ("user");
 User.sync ({
   force: true
 }).success ( function () {
@@ -50,7 +60,7 @@ User.sync ({
 }).error (function () {
   console.log ("Failed to create User table.");
 });
-var QuickSong = db.import (__dirname + '/models/quicksong.js');
+var QuickSong = db.model ("quicksong");
 QuickSong.sync ({
   force: true
 }).success (function () {

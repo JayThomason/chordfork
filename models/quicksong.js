@@ -1,17 +1,20 @@
-module.exports = function (sequelize, DataTypes) {
-  return sequelize.define ('QuickSong', {
+var orm = require('../sequelize-singleton')
+  , seq = orm.Seq ();
+
+module.exports = {
+  model: {
     identifier: {
-      type: DataTypes.STRING,
+      type: seq.STRING,
       allowNull: false,
       primaryKey: true
     },
     owner: {
-      type: DataTypes.STRING,
+      type: seq.STRING,
       allowNull: false,
       defaultValue: "Anonymous"
     },
     song: {
-      type: DataTypes.STRING,
+      type: seq.STRING,
       allowNull: false,
       validate: {
         len: {
@@ -20,5 +23,8 @@ module.exports = function (sequelize, DataTypes) {
         }
       }
     }
-  });
+  },
+  options: {
+    freezeTableName: true
+  }
 }
