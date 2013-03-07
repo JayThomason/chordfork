@@ -20,14 +20,6 @@ require ('./sequelize-singleton').setup ('./models', config.db_name,
 db = require ('./sequelize-singleton');
 
 
-/*, config = require ('./config')
-  , db = new Sequelize (config.db_name, config.db_username, config.db_password, {
-      dialect: config.db_dialect,
-      host: config.db_host,
-      port: config.db_port
-    }) */
-
-
 /**
  * Configuration
  */
