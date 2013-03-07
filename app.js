@@ -16,7 +16,7 @@ require ('./sequelize-singleton').setup ('./models', config.db_name,
     host: config.db_host,
     port: config.db_port 
   });
-db = require ('./sequelize-singleton');
+var db = require ('./sequelize-singleton');
 
 /* Routing And Controllers */
 var user = require ('./controllers/user')
