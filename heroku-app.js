@@ -13,8 +13,8 @@ var url = require('url')
   , dbUrl = url.parse(process.env.DATABASE_URL)
   , authArr = dbUrl.auth.split(':')
   , db_name = dbUrl.path.substring(1)
-  , db_user = authArr[0]
-  , db_pass = authArr[1]
+  , db_username = authArr[0]
+  , db_password = authArr[1]
   , db_host = dbUrl.host
   , db_dialect = 'postgres'
   , db_protocol = 'postgres';
@@ -23,6 +23,7 @@ var url = require('url')
 require ('./sequelize-singleton').setup ('./models', db_name, 
   db_username, db_password, {
     dialect: db_dialect,
+    protocol: db_protocol,
     host: db_host,
     port: db_port 
   });
