@@ -1,6 +1,12 @@
 var db = require ('../sequelize-singleton');
 var User = db.model ('user');
 
+function session_login (req, res, user) {
+  req.session.logged_in = true;
+  req.session.username = user.name;
+  res.redirect ('/create');
+}
+
 exports.login =  function (req, res) {
   User.find({ 
     where: {
@@ -12,9 +18,7 @@ exports.login =  function (req, res) {
       res.send ('Failed to log in user.');
     }
     else {
-      req.session.logged_in = true;
-      req.session.username = User.name;
-      res.redirect ('/create');
+      session_login (req, res, user);
     }
   });
 }
@@ -29,7 +33,7 @@ exports.create = function (req, res) {
     password: pw
   }).success (function (user) {
     console.log ('Created user: ' + user.name);
-    res.redirect ('/create');
+    session_login (req, res, user);
   }).error (function () {
     console.log ('Failed to create user.');
     res.send ('Failed to create user.');
