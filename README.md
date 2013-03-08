@@ -1,7 +1,7 @@
 ChordFork
 ========
 
-ChordFork is a simple song hosting/dvcs application which I have begun working 
+ChordFork is a simple song hosting/cvcs application which I have begun working 
 on for the class CS184. Users will have the ability to upload songs, where a 
 song is currently a simple chord progression, rework those songs over time while 
 saving different revisions, fork other users' public songs, and share songs with 
