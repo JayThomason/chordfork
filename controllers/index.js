@@ -1,3 +1,9 @@
+/**
+ * Default routing table.
+ *
+ * Contains routes for pages not necessarily related to a controller.
+ */
+
 exports.index = function (req, res) {
   res.render ('index', { title: 'Express' });
 };
