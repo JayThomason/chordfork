@@ -60,13 +60,13 @@ exports.create = function (req, res) {
 exports.view = function (req, res) {
   var id = req.params.id;
   if (id == null)
-    return;
+    res.redirect ('notfound');
   Song.find (id).error (function (err) {
     console.log (err);
-    res.send ('failed to find song ' + id);
+    res.redirect ('notfound');
   }).success (function (song) {
     if (song == null) {
-      res.send ('failed to find song ' + id);
+      res.redirect ('notfound');
       return;
     }
     console.log (song.song);

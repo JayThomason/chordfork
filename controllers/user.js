@@ -27,7 +27,7 @@ exports.login =  function (req, res) {
       name: req.body.login_username
     } 
   }).success (function (user) {
-    if (user == null) {
+    if (!user) {
       console.log ('Failed to find user.');
       req.flash ('error', 
           'Error: your username and password do not match.');
@@ -64,17 +64,22 @@ exports.create = function (req, res) {
 
 /* GET users/:id */
 exports.get = function (req, res) {
-  var id = req.params.id;
-  User.find (id).error (function (err) {
+  var name = req.params.id;
+  User.find ({
+    where: {
+      name: name
+    }
+  }).error (function (err) {
     console.log (err);
-      res.redirect ('notfound');
+    res.redirect ('notfound');
   }).success (function (user) {
-    if (user == null) {
+    if (!user) {
       res.redirect ('notfound');
+      return;
     }
     console.log (user);
     user.getSongs ().success (function (songs) {
-      if (songs == null)
+      if (!songs)
         songs = ['none'];
       console.log (songs[0]);
       res.render ('user-view', {
@@ -88,14 +93,17 @@ exports.get = function (req, res) {
 
 /* GET user/home */
 exports.home = function (req, res) {
-  if (req.session.user_id === 'undefined')
+  if (req.session.user_id === 'undefined') {
     res.redirect ('404');
+    return;
+  }
   User.find (req.session.user_id).error (function (err) {
     console.log(err);
     res.send ('failed to find user.', 500);
   }).success (function (user) {
     if (user == null) {
       res.send ('failed to find user', 500);
+      return;
     }
     user.getSongs ().success (function (songs) {
       if (songs == null)
