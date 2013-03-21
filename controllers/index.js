@@ -20,3 +20,6 @@ exports.create = function (req, res) {
   res.render ('create', { title: 'ChordFork'});
 };
 
+exports.about = function (req, res) {
+  res.render ('about', { title: 'About Chordfork' });
+};

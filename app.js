@@ -84,6 +84,7 @@ Song.sync ({
 app.get ('/', routes.splash);
 app.get ('/splash', routes.splash);
 app.get ('/create', routes.create);
+app.get ('/about', routes.about);
 app.post ('/users/login', user.login);
 app.post ('/users/create', user.create);
 app.post ('/quicksong/create', quicksong.create);

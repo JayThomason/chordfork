@@ -5,4 +5,7 @@ html
     title= title
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
   body
-    block content
+    div(id="wrap")
+      block content
+      div(id="push")
+    include footer
