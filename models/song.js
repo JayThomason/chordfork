@@ -17,6 +17,10 @@ module.exports = {
       defaultValue: 'Anonymous',
       allowNull: false
     },
+    owner_id: {
+      type: seq.STRING,
+      allowNull: false
+    },
     song: {
       type: seq.STRING,
       allowNull: false,

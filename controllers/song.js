@@ -29,6 +29,7 @@ exports.create = function (req, res) {
   Song.create ({
     identifier: crypto.randomBytes (10).toString ('hex'), 
     owner: req.session.username,
+    owner_id: req.session.user_id,
     song: song,
     notes: notes,
     genre: genre,
@@ -59,7 +60,11 @@ exports.view = function (req, res) {
     res.render ('song-view', {
       title: song.title,
       owner: song.owner,
-      chords: song.song
+      chords: song.song,
+      owner_id: song.owner_id,
+      genre: song.genre,
+      tags: song.tags,
+      notes:song.notes
     });
   });
 };

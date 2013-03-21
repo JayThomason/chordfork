@@ -54,7 +54,7 @@ app.configure (function () {
 
 var User = db.model ("user");
 User.sync ({
-  force: true
+//  force: true
 }).success ( function () {
   console.log ("User table created.");
 }).error (function () {
@@ -62,7 +62,7 @@ User.sync ({
 });
 var QuickSong = db.model ("quicksong");
 QuickSong.sync ({
-  force: true
+//  force: true
 }).success (function () {
   console.log ("QuickSong table created.");
 }).error (function () {
@@ -70,7 +70,7 @@ QuickSong.sync ({
 });
 var Song = db.model ("song");
 Song.sync ({
-  force: true
+//  force: true
 }).success (function () {
   console.log ("Song table created.");
 }).error (function () {
@@ -85,6 +85,7 @@ app.get ('/', routes.splash);
 app.get ('/splash', routes.splash);
 app.get ('/create', routes.create);
 app.get ('/about', routes.about);
+app.get ('/users/:id', user.get);
 app.post ('/users/login', user.login);
 app.post ('/users/create', user.create);
 app.post ('/quicksong/create', quicksong.create);

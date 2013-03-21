@@ -13,13 +13,8 @@ block content
             a(href="../../create") create
   div(class="container-fluid")
     div(style="text-align: center")
-      h3 #{title}
-      h4 by
-        a(href="../../user/"+owner_id) #{owner}
+      h3 #{name}
     div(class="well", style="margin: 0 auto; max-width: 500px;")
-      h5 Genre: #{genre}
-      h4 Chords
-      span(class="display-chords")= chords
-      h4 Notes
-      p #{notes}
+      h4 Songs
+      p(id="song_list")
 

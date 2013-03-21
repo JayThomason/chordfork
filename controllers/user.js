@@ -16,10 +16,11 @@ var User = db.model ('user');
 function session_login (req, res, user) {
   req.session.logged_in = true;
   req.session.username = user.name;
+  req.session.user_id = user.id;
   res.redirect ('/create');
 }
 
-/* POST /user/login */
+/* POST /users/login */
 exports.login =  function (req, res) {
   User.find({ 
     where: {
@@ -42,7 +43,7 @@ exports.login =  function (req, res) {
   });
 }
 
-/* POST user/create */
+/* POST users/create */
 exports.create = function (req, res) {
   var username = req.body.create_username;
   var pw = req.body.create_password;
@@ -59,3 +60,22 @@ exports.create = function (req, res) {
     res.send ('Failed to create user.');
   });
 };
+
+/* GET users/:id */
+exports.get = function (req, res) {
+  var id = req.params.id;
+  User.find (id).error (function (err) {
+    console.log (err);
+    res.send ('failed to find user' + id);
+  }).success (function (user) {
+    if (user == null) {
+      res.send ('failed to find user' + id);
+      return;
+    }
+    console.log (user);
+    res.render ('user-view', {
+      title: user.name + ' on ChordFork',
+      name: user.name
+    });
+  });
+}
