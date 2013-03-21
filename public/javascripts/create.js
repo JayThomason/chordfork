@@ -142,7 +142,7 @@ $("#quick-post").click (function () {
       "song": song_body 
   }).done (function (data) {
     $(".modal-post-link").text (data);
-    $(".modal-post-link").attr ("href", "/quicksong/view/" + data);
+    $(".modal-post-link").attr ("href", "/quicksong/" + data);
     $("#myModal").modal('show');
   });
 });
@@ -150,19 +150,22 @@ $("#quick-post").click (function () {
 
 $("#post").click (function () {
   var song_body = $(".display-chords").text ();
-  var genre = $("#genre").text ();
-  var tags = $("#tags").text ();
-  var notes = $("#notes").text ();
-  if (song_body.length == 0)
+  var genre = $("#genre").val ();
+  var tags = $("#tags").val ();
+  var notes = $("#notes").val ();
+  var name = $("#song-name").val ();
+  if (song_body.length == 0
+    || name.length == 0)
     return;
   $.post ("/song/create", {
     "song": song_body,
     "notes": notes,
     "genre": genre,
-    "tags": tags
+    "tags": tags,
+    "name": name
   }).done (function (data) {
     $(".modal-post-link").text (data);
-    $(".modal-post-link").attr ("href", "/song/view/" + data);
+    $(".modal-post-link").attr ("href", "/song/" + data);
     $("#myModal").modal('show');
   });
 });

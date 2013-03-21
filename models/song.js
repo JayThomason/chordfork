@@ -31,6 +31,16 @@ module.exports = {
         }
       }
     },
+    name: {
+      type: seq.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: 1,
+          msg: "Song name must be at least 1 character in length."
+        }
+      }
+    },
     notes: {
       type: seq.STRING,
       allowNull: true

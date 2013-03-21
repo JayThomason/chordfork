@@ -73,9 +73,15 @@ exports.get = function (req, res) {
       return;
     }
     console.log (user);
-    res.render ('user-view', {
-      title: user.name + ' on ChordFork',
-      name: user.name
+    user.getSongs ().success (function (songs) {
+      if (songs == null)
+        songs = ['none'];
+      console.log (songs[0]);
+      res.render ('user-view', {
+        title: user.name + ' on ChordFork',
+        name: user.name,
+        songs: songs
+      });
     });
   });
 }

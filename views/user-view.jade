@@ -17,4 +17,7 @@ block content
     div(class="well", style="margin: 0 auto; max-width: 500px;")
       h4 Songs
       p(id="song_list")
-
+        each song in songs
+          strong 
+            a(href='../../song/'+song.identifier) #{song.name} 
+            br
