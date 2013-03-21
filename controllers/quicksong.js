@@ -17,7 +17,7 @@ var db = require ('../sequelize-singleton')
 exports.create = function (req, res) {
   var quicksong = req.body.song;
   if (quicksong == null)
-    res.redirect ('../splash');
+    res.send ('failed to create quicksong');
   var owner = req.session.username === 'undefined' ? 
       'Anonymous' : req.session.username;
   QuickSong.create ({
@@ -30,6 +30,7 @@ exports.create = function (req, res) {
     res.send (song.identifier);
   }).error (function () {
     console.log ('Failed to create quick song.');
+    res.send ('failed to create quicksong');
   });
 };
 
@@ -40,11 +41,10 @@ exports.view = function (req, res) {
     return;
   QuickSong.find (id).error (function (err) {
     console.log (err);
-    res.send ('failed to find quick song ' + id);
+    res.redirect ('notfound');
   }).success (function (song) {
     if (song == null) {
-      res.send ('failed to find quick song ' + id);
-      return;
+      res.redirect ('notfound');
     }
     console.log (song.song);
     res.render ('quicksong-view', {

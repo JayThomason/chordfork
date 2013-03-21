@@ -55,9 +55,10 @@ exports.create = function (req, res) {
   }).success (function (user) {
     console.log ('Created user: ' + user.name);
     session_login (req, res, user);
-  }).error (function () {
+  }).error (function (err) {
     console.log ('Failed to create user.');
-    res.send ('Failed to create user.');
+    req.flash ('error', 'Unable to create account:' + err);
+    res.redirect ('/');
   });
 };
 
@@ -66,10 +67,10 @@ exports.get = function (req, res) {
   var id = req.params.id;
   User.find (id).error (function (err) {
     console.log (err);
-    res.send ('failed to find user' + id);
+      res.redirect ('notfound');
   }).success (function (user) {
     if (user == null) {
-      res.send ('failed to find user' + id);
+      res.redirect ('notfound');
     }
     console.log (user);
     user.getSongs ().success (function (songs) {

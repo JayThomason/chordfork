@@ -44,6 +44,9 @@ app.configure (function () {
   app.use (flash ());
   app.use (app.router);
   app.use (express.static (path.join (__dirname, 'public')));
+  app.use (function (req, res) {
+    res.redirect ('notfound');
+  });
 });
 
 
@@ -60,21 +63,21 @@ User.hasMany(QuickSong);
 Song.belongsTo(User);
 QuickSong.belongsTo(User);
 User.sync ({
-//  force: true
+  force: true
 }).success ( function () {
   console.log ("User table created.");
 }).error (function () {
   console.log ("Failed to create User table.");
 });
 QuickSong.sync ({
-//  force: true
+  force: true
 }).success (function () {
   console.log ("QuickSong table created.");
 }).error (function () {
   console.log ("Failed to create QuickSong table.");
 });
 Song.sync ({
-//  force: true
+  force: true
 }).success (function () {
   console.log ("Song table created.");
 }).error (function () {
@@ -90,6 +93,7 @@ app.get ('/splash', routes.splash);
 app.get ('/create', routes.create);
 app.get ('/about', routes.about);
 app.get ('/home', user.home);
+app.get ('/notfound', routes.notfound);
 app.get ('/user/:id', user.get);
 app.post ('/user/login', user.login);
 app.post ('/user/create', user.create);

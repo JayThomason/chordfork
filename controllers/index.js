@@ -25,3 +25,7 @@ exports.create = function (req, res) {
 exports.about = function (req, res) {
   res.render ('about', { title: 'About Chordfork' });
 };
+
+exports.notfound = function (req, res) {
+  res.render ('notfound', { title: 'Not Found'});
+};
