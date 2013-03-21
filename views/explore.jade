@@ -8,16 +8,16 @@ block content
         a(class='brand', href="/") ChordFork
         ul(class="nav")
           li
-            a(href="/explore") explore
+            a(href="#", onclick="return false;") explore
           li
             a(href="/create") create
   div(class="container-fluid")
     div(style="text-align: center")
-      h3 #{name}
+      h3 Explore
     div(class="well", style="margin: 0 auto; max-width: 500px;")
-      h4 Songs
-      p(id="song_list")
-        each song in songs
+      h4 Click on users to view their songs.
+      p(id="user_list")
+        each user in users
           strong 
-            a(href='/song/'+song.identifier) #{song.name} 
+            a(href='/user/view/'+user.name) #{user.name}
             br

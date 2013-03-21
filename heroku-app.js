@@ -70,25 +70,23 @@ var User = db.model ("user");
 var QuickSong = db.model ("quicksong");
 var Song = db.model ("song");
 User.hasMany(Song);
-User.hasMany(QuickSong);
 Song.belongsTo(User);
-QuickSong.belongsTo(User);
 User.sync ({
-//  force: true
+  force: true
 }).success ( function () {
   console.log ("User table created.");
 }).error (function () {
   console.log ("Failed to create User table.");
 });
 QuickSong.sync ({
-//  force: true
+  force: true
 }).success (function () {
   console.log ("QuickSong table created.");
 }).error (function () {
   console.log ("Failed to create QuickSong table.");
 });
 Song.sync ({
-//  force: true
+  force: true
 }).success (function () {
   console.log ("Song table created.");
 }).error (function () {
@@ -105,11 +103,11 @@ app.get ('/create', routes.create);
 app.get ('/about', routes.about);
 app.get ('/home', user.home);
 app.get ('/notfound', routes.notfound);
-app.get ('/user/:id', user.get);
+app.get ('/user/view/:id', user.get);
 app.post ('/user/login', user.login);
 app.post ('/user/create', user.create);
 app.post ('/quicksong/create', quicksong.create);
-app.get ('/quicksong/view/:id', quicksong.view);
+app.get ('/quicksong/:id', quicksong.view);
 app.post ('/song/create', song.create);
 app.get ('/song/:id', song.view);
 

@@ -127,3 +127,16 @@ exports.home = function (req, res) {
     });
   });
 };
+
+/* GET user/explore */
+exports.explore = function (req, res) {
+  User.findAll ().error (function (err) {
+    console.log (err);
+    res.send ('failed to retrieve users.', 500);
+  }).success (function (users) {
+    res.render ('explore', {
+      title: 'Explore',
+      users: users
+    });
+  });
+};

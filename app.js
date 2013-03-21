@@ -92,6 +92,7 @@ app.get ('/create', routes.create);
 app.get ('/about', routes.about);
 app.get ('/home', user.home);
 app.get ('/notfound', routes.notfound);
+app.get ('/explore', user.explore);
 app.get ('/user/view/:id', user.get);
 app.post ('/user/login', user.login);
 app.get ('/user/logout', user.logout);
