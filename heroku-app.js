@@ -106,6 +106,7 @@ app.get ('/notfound', routes.notfound);
 app.get ('/explore', user.explore);
 app.get ('/user/view/:id', user.get);
 app.post ('/user/login', user.login);
+app.get ('/user/logout', user.logout);
 app.post ('/user/create', user.create);
 app.post ('/quicksong/create', quicksong.create);
 app.get ('/quicksong/:id', quicksong.view);
