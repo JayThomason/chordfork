@@ -5,17 +5,17 @@ block content
   div(class='navbar navbar-inverse navbar-fixed-top')
     div(class='navbar-inner')
       div(class='container')
-        a(class='brand', href="../../splash") ChordFork
+        a(class='brand', href="/") ChordFork
         ul(class="nav")
           li
             a(href="#", onclick="return false;") explore
           li
-            a(href="../../create") create
+            a(href="/create") create
   div(class="container-fluid")
     div(style="text-align: center")
       h3 #{name}
       h4 
-        a(href="../../user/view/"+owner)  #{owner}
+        a(href="/user/view/"+owner)  #{owner}
     div(class="well", style="margin: 0 auto; max-width: 500px;")
       h5 Genre: #{genre}
       br

@@ -48,7 +48,8 @@ exports.logout = function (req, res) {
   if (req.session.logged_in === 'undefined')
     return;
   console.log ('logging out user: ' + req.session.user_id);
-  req.session.clear ();
+  delete req.session.user_id;
+  delete req.session.user_name;
   req.session.logged_in = false;
   res.redirect ('/');
 }
