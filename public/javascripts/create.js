@@ -141,7 +141,7 @@ $("#quick-post").click (function () {
   $.post ('/quicksong/create', {
       "song": song_body 
   }).done (function (data) {
-    $(".modal-post-link").text (data);
+    $(".modal-post-link").text ('http://chordfork.com/quicksong/' + data);
     $(".modal-post-link").attr ("href", "/quicksong/" + data);
     $("#myModal").modal('show');
   });
@@ -164,7 +164,7 @@ $("#post").click (function () {
     "tags": tags,
     "name": name
   }).done (function (data) {
-    $(".modal-post-link").text (data);
+    $(".modal-post-link").text ('http://chordfork.com/song/' + data);
     $(".modal-post-link").attr ("href", "/song/" + data);
     $("#myModal").modal('show');
   });

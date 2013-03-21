@@ -18,11 +18,9 @@ exports.create = function (req, res) {
   var quicksong = req.body.song;
   if (quicksong == null)
     res.send ('failed to create quicksong');
-  var owner = req.session.username === 'undefined' ? 
-      'Anonymous' : req.session.username;
   QuickSong.create ({
     identifier: crypto.randomBytes (10).toString ('hex'), 
-    owner: owner,
+    owner: 'Anon',
     song: quicksong
   }).success (function (song) {
     console.log ('Create quick song: ' + song.identifier);

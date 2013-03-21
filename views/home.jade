@@ -5,12 +5,18 @@ block content
   div(class='navbar navbar-inverse navbar-fixed-top')
     div(class='navbar-inner')
       div(class='container')
-        a(class='brand', href="../../splash") ChordFork
+        a(class='brand', href="/") ChordFork
         ul(class="nav")
           li
             a(href="#", onclick="return false;") explore
           li
-            a(href="../../create") create
+            a(href="/create") create
+          li(class="dropdown")
+            a(href="#", class="dropdown-toggle", data-toggle="dropdown")
+              b(class="caret")
+            ul(class="dropdown-menu")
+              li
+                a(href="/user/logout") logout
   div(class="container-fluid")
     div(style="text-align: center")
       h3 Welcome #{name}

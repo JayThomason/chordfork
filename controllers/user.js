@@ -20,7 +20,7 @@ function session_login (req, res, user) {
   res.redirect ('/create');
 }
 
-/* POST /users/login */
+/* POST /user/login */
 exports.login =  function (req, res) {
   User.find({ 
     where: {
@@ -41,9 +41,19 @@ exports.login =  function (req, res) {
     req.flash ('info', 'test');
     res.redirect ('/');
   });
+};
+
+/* GET user/logout */
+exports.logout = function (req, res) {
+  if (req.session.logged_in === 'undefined')
+    return;
+  console.log ('logging out user: ' + req.session.user_id);
+  req.session.clear ();
+  req.session.logged_in = false;
+  res.redirect ('/');
 }
 
-/* POST users/create */
+/* POST user/create */
 exports.create = function (req, res) {
   var username = req.body.create_username;
   var pw = req.body.create_password;
@@ -62,7 +72,7 @@ exports.create = function (req, res) {
   });
 };
 
-/* GET users/:id */
+/* GET user/view/:username */
 exports.get = function (req, res) {
   var name = req.params.id;
   User.find ({
