@@ -136,14 +136,33 @@ $("#next-chord").click (function () {
 
 $("#quick-post").click (function () {
   var song_body = $(".display-chords").text();
-  var callback = function (data) {
-    $(".container-fluid").append ("test");
-  };
+  if (song_body.length == 0)
+    return;
   $.post ('/quicksong/create', {
       "song": song_body 
   }).done (function (data) {
     $(".modal-post-link").text (data);
     $(".modal-post-link").attr ("href", "/quicksong/view/" + data);
+    $("#myModal").modal('show');
+  });
+});
+
+
+$("#post").click (function () {
+  var song_body = $(".display-chords").text ();
+  var genre = $("#genre").text ();
+  var tags = $("#tags").text ();
+  var notes = $("#notes").text ();
+  if (song_body.length == 0)
+    return;
+  $.post ("/song/create", {
+    "song": song_body,
+    "notes": notes,
+    "genre": genre,
+    "tags": tags
+  }).done (function (data) {
+    $(".modal-post-link").text (data);
+    $(".modal-post-link").attr ("href", "/song/view/" + data);
     $("#myModal").modal('show');
   });
 });

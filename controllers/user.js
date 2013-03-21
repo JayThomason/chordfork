@@ -27,15 +27,17 @@ exports.login =  function (req, res) {
     } 
   }).success (function (user) {
     if (user == null) {
-      console.log ('Failed to log in user.');
-      res.send ('Failed to log in user.');
+      console.log ('Failed to find user.');
+      req.flash ('info', 'test');
+      res.redirect ('/');
     }
     else {
       session_login (req, res, user);
     }
   }).error (function () {
     console.log ('Failed to find user.');
-    res.send ('Failed to find user.');
+    req.flash ('info', 'test');
+    res.redirect ('/');
   });
 }
 

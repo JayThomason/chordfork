@@ -21,6 +21,7 @@ var db = require ('./sequelize-singleton');
 /* Routing And Controllers */
 var user = require ('./controllers/user')
   , quicksong = require ('./controllers/quicksong')
+  , song = require ('./controllers/song')
   , routes = require ('./controllers');
 
 
@@ -32,6 +33,7 @@ app.configure (function () {
   app.set  ('port', process.env.PORT || 8080);
   app.set ('views', __dirname + '/views');
   app.set ('view engine', 'jade');
+  app.set ('view options', { pretty: true});
   app.use (express.favicon ());
   app.use (express.logger ('dev'));
   app.use (express.bodyParser ());
@@ -64,6 +66,14 @@ QuickSong.sync ({
 }).error (function () {
   console.log ("Failed to create QuickSong table.");
 });
+var Song = db.model ("song");
+Song.sync ({
+  force: true
+}).success (function () {
+  console.log ("Song table created.");
+}).error (function () {
+  console.log ("Failed to create Song table.");
+});
 
 
 /**
@@ -76,6 +86,8 @@ app.post ('/users/login', user.login);
 app.post ('/users/create', user.create);
 app.post ('/quicksong/create', quicksong.create);
 app.get ('/quicksong/view/:id', quicksong.view);
+app.post ('/song/create', song.create);
+app.get ('/song/view/:id', song.view);
 
 
 
