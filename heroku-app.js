@@ -6,6 +6,7 @@
 var express = require ('express')
   , http = require ('http')
   , path = require ('path')
+  , flash = require ('connect-flash')
   , app = express ();
 
 /* Heroku Url Parsing */
@@ -33,6 +34,7 @@ var db = require ('./sequelize-singleton');
 /* Routing And Controllers */
 var user = require ('./controllers/user')
   , quicksong = require ('./controllers/quicksong')
+  , song = require ('./controllers/song')
   , routes = require ('./controllers');
 
 
@@ -50,8 +52,12 @@ app.configure (function () {
   app.use (express.methodOverride ());
   app.use (express.cookieParser ('your secret here'));
   app.use (express.session ());
+  app.use (flash ());
   app.use (app.router);
   app.use (express.static (path.join (__dirname, 'public')));
+  app.use (function (req, res) {
+    res.redirect ('notfound');
+  });
 });
 
 
@@ -61,6 +67,12 @@ app.configure (function () {
  */
 
 var User = db.model ("user");
+var QuickSong = db.model ("quicksong");
+var Song = db.model ("song");
+User.hasMany(Song);
+User.hasMany(QuickSong);
+Song.belongsTo(User);
+QuickSong.belongsTo(User);
 User.sync ({
   force: true
 }).success ( function () {
@@ -68,13 +80,19 @@ User.sync ({
 }).error (function () {
   console.log ("Failed to create User table.");
 });
-var QuickSong = db.model ("quicksong");
 QuickSong.sync ({
   force: true
 }).success (function () {
   console.log ("QuickSong table created.");
 }).error (function () {
   console.log ("Failed to create QuickSong table.");
+});
+Song.sync ({
+  force: true
+}).success (function () {
+  console.log ("Song table created.");
+}).error (function () {
+  console.log ("Failed to create Song table.");
 });
 
 
@@ -84,12 +102,16 @@ QuickSong.sync ({
 app.get ('/', routes.splash);
 app.get ('/splash', routes.splash);
 app.get ('/create', routes.create);
-app.post ('/users/login', user.login);
-app.post ('/users/create', user.create);
+app.get ('/about', routes.about);
+app.get ('/home', user.home);
+app.get ('/notfound', routes.notfound);
+app.get ('/user/:id', user.get);
+app.post ('/user/login', user.login);
+app.post ('/user/create', user.create);
 app.post ('/quicksong/create', quicksong.create);
 app.get ('/quicksong/view/:id', quicksong.view);
-
-
+app.post ('/song/create', song.create);
+app.get ('/song/:id', song.view);
 
 /**
  * Start
