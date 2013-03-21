@@ -6,11 +6,12 @@
     "start": "node app"
   },
   "dependencies": {
-      "express": "3.1.0",
-         "jade": "0.28.1",
-           "pg": "0.13.1",
-    "sequelize": "1.6.0-beta4",
-      "connect": "2.7.3"
+          "express": "3.1.0",
+             "jade": "0.28.1",
+               "pg": "0.13.1",
+        "sequelize": "1.6.0-beta4",
+          "connect": "2.7.3",
+    "connect-flash": "x.x.x"
   },
   "engines": {
     "node": "0.8.x",

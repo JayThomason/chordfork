@@ -9,7 +9,11 @@ exports.index = function (req, res) {
 };
 
 exports.splash = function (req, res) {
-  res.render ('splash', { title: 'ChordFork'});
+  var error = req.flash ('error');
+  res.render ('splash', { 
+    title: 'ChordFork',
+    error: error
+  });
 };
 
 exports.create = function (req, res) {

@@ -16,6 +16,7 @@ block content
       h2(class="text-center") Welcome to ChordFork.
       p.lead(class="text-center") A simple version control tool for songwriting.
     div.row-fluid
+      h4(class="text-center", style="color: red") #{error}
       div.span4
       div(class="span2", style="margin-right: 30px")
         form(id="form_login", action="/users/login", method="post", enctype="application/x-www-urlencoded")

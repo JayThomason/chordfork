@@ -28,7 +28,8 @@ exports.login =  function (req, res) {
   }).success (function (user) {
     if (user == null) {
       console.log ('Failed to find user.');
-      req.flash ('info', 'test');
+      req.flash ('error', 
+          'Error: your username and password do not match.');
       res.redirect ('/');
     }
     else {

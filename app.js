@@ -7,6 +7,7 @@ var express = require ('express')
   , http = require ('http')
   , path = require ('path')
   , config = require ('./config')
+  , flash = require ('connect-flash')
   , app = express ();
 
 /* Sequelize Singleton */
@@ -40,6 +41,7 @@ app.configure (function () {
   app.use (express.methodOverride ());
   app.use (express.cookieParser ('your secret here'));
   app.use (express.session ());
+  app.use (flash ());
   app.use (app.router);
   app.use (express.static (path.join (__dirname, 'public')));
 });
