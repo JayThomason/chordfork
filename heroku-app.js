@@ -74,21 +74,21 @@ User.hasMany(QuickSong);
 Song.belongsTo(User);
 QuickSong.belongsTo(User);
 User.sync ({
-  force: true
+//  force: true
 }).success ( function () {
   console.log ("User table created.");
 }).error (function () {
   console.log ("Failed to create User table.");
 });
 QuickSong.sync ({
-  force: true
+//  force: true
 }).success (function () {
   console.log ("QuickSong table created.");
 }).error (function () {
   console.log ("Failed to create QuickSong table.");
 });
 Song.sync ({
-  force: true
+//  force: true
 }).success (function () {
   console.log ("Song table created.");
 }).error (function () {
