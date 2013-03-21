@@ -89,6 +89,7 @@ app.get ('/', routes.splash);
 app.get ('/splash', routes.splash);
 app.get ('/create', routes.create);
 app.get ('/about', routes.about);
+app.get ('/home', user.home);
 app.get ('/user/:id', user.get);
 app.post ('/user/login', user.login);
 app.post ('/user/create', user.create);

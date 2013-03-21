@@ -70,7 +70,6 @@ exports.get = function (req, res) {
   }).success (function (user) {
     if (user == null) {
       res.send ('failed to find user' + id);
-      return;
     }
     console.log (user);
     user.getSongs ().success (function (songs) {
@@ -85,3 +84,26 @@ exports.get = function (req, res) {
     });
   });
 }
+
+/* GET user/home */
+exports.home = function (req, res) {
+  if (req.session.user_id === 'undefined')
+    res.redirect ('404');
+  User.find (req.session.user_id).error (function (err) {
+    console.log(err);
+    res.send ('failed to find user.', 500);
+  }).success (function (user) {
+    if (user == null) {
+      res.send ('failed to find user', 500);
+    }
+    user.getSongs ().success (function (songs) {
+      if (songs == null)
+        songs = ['none'];
+      res.render ('home', {
+        title: 'ChordFork Home',
+        name: user.name,
+        songs: songs
+      });
+    });
+  });
+};

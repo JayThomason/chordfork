@@ -1,15 +1,23 @@
 extends layout
 
-
+    
 block content
   div(class='navbar navbar-inverse navbar-fixed-top')
     div(class='navbar-inner')
       div(class='container')
-        a(class='brand', href="#", onclick="return false;") ChordFork
-        ul.nav
+        a(class='brand', href="../../splash") ChordFork
+        ul(class="nav")
           li
-            a(href="#") explore
+            a(href="#", onclick="return false;") explore
           li
-            a(href="/create") create
-  div(class='container-fluid')
-    div(class="home-header")
+            a(href="../../create") create
+  div(class="container-fluid")
+    div(style="text-align: center")
+      h3 Welcome #{name}
+    div(class="well", style="margin: 0 auto; max-width: 500px;")
+      h4 Your Songs
+      p(id="song_list")
+        each song in songs
+          strong 
+            a(href='../../song/'+song.identifier) #{song.name} 
+            br

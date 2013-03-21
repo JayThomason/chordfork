@@ -9,6 +9,8 @@ exports.index = function (req, res) {
 };
 
 exports.splash = function (req, res) {
+  if (req.session.logged_in)
+    res.redirect ('home');
   var error = req.flash ('error');
   res.render ('splash', { 
     title: 'ChordFork',
