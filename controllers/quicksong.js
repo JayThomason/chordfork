@@ -23,6 +23,10 @@ exports.create = function (req, res) {
     owner: 'Anon',
     song: quicksong
   }).success (function (song) {
+    if (!song) {
+      res.redirect ('notfound');
+      return;
+    }
     console.log ('Create quick song: ' + song.identifier);
     console.log ('chords: ' + song.song);
     res.send (song.identifier);
@@ -32,7 +36,7 @@ exports.create = function (req, res) {
   });
 };
 
-/* GET /quicksong/view/:id */
+/* GET /quicksong/:id */
 exports.view = function (req, res) {
   var id = req.params.id;
   if (id == null)
@@ -41,8 +45,9 @@ exports.view = function (req, res) {
     console.log (err);
     res.redirect ('notfound');
   }).success (function (song) {
-    if (song == null) {
+    if (!song) {
       res.redirect ('notfound');
+      return;
     }
     console.log (song.song);
     res.render ('quicksong-view', {
